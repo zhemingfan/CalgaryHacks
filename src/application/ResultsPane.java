@@ -68,23 +68,26 @@ public class ResultsPane extends Pane {
 		
 		
 		//INSERTED TEST OBJECTS
-		ArrayList<String> testInterest = new ArrayList<>(Arrays.asList("Coding", "White Whale AI", "Eating", "Hackathons", "KBBQ"));
-	    ArrayList<String> testInterest2 = new ArrayList<>(Arrays.asList("Datamining" , "Eating", "A&W", "Linux"));
-	    ArrayList<String> testInterest3 = new ArrayList<>(Arrays.asList("Coding", "Datamining", "Eating", "A&W", "Windows"));
-	    ArrayList<String> testInterest4 = new ArrayList<>(Arrays.asList("Coding", "Datamining", "Cisco", "White Whale AI", "Algorithms"));
-	    ArrayList<String> testInterest5 = new ArrayList<>(Arrays.asList("Hackathons", "Datamining"));
+//		ArrayList<String> testInterest = new ArrayList<>(Arrays.asList("Coding", "White Whale AI", "Eating", "Hackathons", "KBBQ"));
+//	    ArrayList<String> testInterest2 = new ArrayList<>(Arrays.asList("Datamining" , "Eating", "A&W", "Linux"));
+//	    ArrayList<String> testInterest3 = new ArrayList<>(Arrays.asList("Coding", "Datamining", "Eating", "A&W", "Windows"));
+//	    ArrayList<String> testInterest4 = new ArrayList<>(Arrays.asList("Coding", "Datamining", "Cisco", "White Whale AI", "Algorithms"));
+//	    ArrayList<String> testInterest5 = new ArrayList<>(Arrays.asList("Hackathons", "Datamining"));
+//	    
+//	    Professor testProf5 = new Professor("Lorenz Alabood", testInterest5);
+//	    Professor testProf4 = new Professor("Khan Linh Phan Li", testInterest4);
+//	    Professor testProf3 = new Professor("Jeremy Fan", testInterest3, "www.youtube.com/Jeremy", "Computer Sceince", "jeremy.fan@ucalgary.ca");
+//	    Professor testProf2 = new Professor("Kelly Liu", testInterest2, "www.youtube.com/KellyLiu", "Computer Science", "Kelly.Liu2@ucalgary.ca");
+//	    Professor testProf = new Professor("Se Yeon Kim", testInterest, "www.youtube.com/SeYeonKim", "Computer Science", "Kim.SeYeon@ucalgary.ca");
+//
+//	    ArrayList<Professor> matches = new ArrayList<>(Arrays.asList(testProf, testProf2, testProf3, testProf4, testProf5));
 	    
-	    Professor testProf5 = new Professor("Lorenz Alabood", testInterest5);
-	    Professor testProf4 = new Professor("Khan Linh Phan Li", testInterest4);
-	    Professor testProf3 = new Professor("Jeremy Fan", testInterest3, "www.youtube.com/Jeremy", "Computer Sceince", "jeremy.fan@ucalgary.ca");
-	    Professor testProf2 = new Professor("Kelly Liu", testInterest2, "www.youtube.com/KellyLiu", "Computer Science", "Kelly.Liu2@ucalgary.ca");
-	    Professor testProf = new Professor("Se Yeon Kim", testInterest, "www.youtube.com/SeYeonKim", "Computer Science", "Kim.SeYeon@ucalgary.ca");
-
-	    ArrayList<Professor> matches = new ArrayList<>(Arrays.asList(testProf, testProf2, testProf3, testProf4, testProf5));
-	    
+		
+		
 	    //ArrayList<String> testUserInterest = new ArrayList<>(Arrays.asList("Datamining", "Coding", "Eating", "A&W"));
 	    User testUser = new User("Jonathan Santos", SearchPane.keys, "Computer Science");
-	    
+	    ProofOfConcept poc = new ProofOfConcept();
+	    ArrayList<Professor> matches = ProofOfConcept.getMatches(department,SearchPane.keys);
 	    
 	/*	for (int i = 0; i < 21; i ++) {
 			matches.add(new Professor("a"+i, new ArrayList<String>(),"a"+i, "a"+i, "a"+i));

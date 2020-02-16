@@ -1,4 +1,5 @@
 package application;
+import ProofOfConcept.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -137,8 +138,9 @@ public class SearchPane extends Pane {
 		
 		Button btnkey = new Button();
 		
-		ArrayList<String> interestList = new ArrayList<>(Arrays.asList("Coding", "Hackathons", "Cisco", "White Whale AI", "A&W", "Eating", "KBBQ", "Algorithms", "Linux", "Windows"));
-		
+//		ArrayList<String> interestList = new ArrayList<>(Arrays.asList("Coding", "Hackathons", "Cisco", "White Whale AI", "A&W", "Eating", "KBBQ", "Algorithms", "Linux", "Windows"));
+		ProofOfConcept poc = new ProofOfConcept();
+		ArrayList<String> interestList = ProofOfConcept.getUniqueInterests();
 		for (int i = 0; i < 10; i++ ) {
 			btnkey= new Button();
 			btnkey.setBackground(null);
