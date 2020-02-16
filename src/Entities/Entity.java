@@ -1,3 +1,4 @@
+package Entities;
 import java.util.*;
 
 public class Entity{
@@ -6,7 +7,7 @@ public class Entity{
   private String department;
 
 public Entity(String aName, ArrayList<String> interestList, String aDepartment){
-  setName(name);
+  setName(aName);
   setInterests(interestList);
   setDepartment(aDepartment);
 }

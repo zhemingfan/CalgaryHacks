@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import Entities.*;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -28,6 +31,9 @@ public class SearchPane extends Pane {
 		this.width = w;
 		this.keys = new ArrayList<String>();
 		
+		ImageView logo = new ImageView( new Image("/application/logo.png", true));
+		logo.setLayoutX((this.width/2)+100);
+		
 		Button btn = new Button("Search");
 		btn.setPrefWidth(100);
 		btn.setPrefHeight(50);
@@ -39,7 +45,7 @@ public class SearchPane extends Pane {
 				Scene sc = Main.getScene();
 				System.out.println(SearchPane.this.selDept.getValue());
 				System.out.println(SearchPane.this.keys);
-				sc.setRoot(new ResultsPane(SearchPane.this.width, SearchPane.this.height));
+				sc.setRoot(new ResultsPane(SearchPane.this.selDept.getValue(), SearchPane.this.keys, SearchPane.this.width, SearchPane.this.height));
 			}
 		});
 		
@@ -91,7 +97,7 @@ public class SearchPane extends Pane {
 		this.keypane.setVgap(4);
 		
 		
-		this.getChildren().addAll(btn, this.selDept, selKey, this.keypane, clr);
+		this.getChildren().addAll(logo,btn, this.selDept, selKey, this.keypane, clr);
 		this.setStyle("-fx-background-color: white");
 	}
 }
