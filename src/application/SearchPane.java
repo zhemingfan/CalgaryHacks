@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -130,20 +131,25 @@ public class SearchPane extends Pane {
 		vbox.setLayoutY(350);
 		vbox.getChildren().add(descriptor);
 		
+		ScrollPane container = new ScrollPane();
 		this.keypane = new FlowPane();
 		this.keypane.setPrefWidth(500);
-		this.keypane.setPrefHeight(300);
-		this.keypane.setLayoutX(this.width/2-250);
-		this.keypane.setLayoutY(390);
+//		this.keypane.setPrefHeight(300);
+//		this.keypane.setLayoutX(this.width/2-250);
+//		this.keypane.setLayoutY(390);
 		this.keypane.setHgap(4);
 		this.keypane.setVgap(4);
-		
+		container.setPrefWidth(500);
+		container.setPrefHeight(150);
+		container.setContent(this.keypane);
+		container.setLayoutX(this.width/2-250);
+		container.setLayoutY(390);
 		Button btnkey = new Button();
 		
 //		ArrayList<String> interestList = new ArrayList<>(Arrays.asList("Coding", "Hackathons", "Cisco", "White Whale AI", "A&W", "Eating", "KBBQ", "Algorithms", "Linux", "Windows"));
 		ProofOfConcept poc = new ProofOfConcept();
 		ArrayList<String> interestList = ProofOfConcept.getUniqueInterests();
-		for (int i = 0; i < 10; i++ ) {
+		for (int i = 0; i < interestList.size(); i++ ) {
 			btnkey= new Button();
 			btnkey.setBackground(null);
 			btnkey.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff");
@@ -156,7 +162,7 @@ public class SearchPane extends Pane {
 		
 //		this.getChildren().addAll(logo,btn, this.selDept, selKey, this.keypane, clr);
 		
-		this.getChildren().addAll(logo, this.selDept, vbox, this.keypane, clr, btn);
+		this.getChildren().addAll(logo, this.selDept, vbox, container, clr, btn);
 		this.setStyle("-fx-background-color: white");
 	}
 }
