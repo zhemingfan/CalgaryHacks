@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class ResultsPane extends Pane {
@@ -23,9 +24,15 @@ public class ResultsPane extends Pane {
 		private Professor prof;
 		private HBox layout;
 		
-		public ProfileEvent(Professor prof, HBox layout) {
+		public ProfileEvent(Button temp, Professor prof, HBox layout) {
 			this.prof = prof;
 			this.layout = layout;
+			temp.setOnMouseEntered( e -> {
+				temp.setStyle("-fx-background-color: #ef310d; -fx-text-fill: #000000");
+			});
+			temp.setOnMouseExited( e -> {
+				temp.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #000000");
+			});
 		}
 		@Override
 		public void handle(ActionEvent event) {
@@ -52,11 +59,13 @@ public class ResultsPane extends Pane {
 		ScrollPane resultBox = new ScrollPane();
 		VBox resultList = new VBox(8);
 		resultList.setPrefSize(width*0.3, height);
+		resultList.setStyle("-fx-background-color: #ffffff");
 		resultBox.setContent(resultList);
+		resultBox.setStyle("-fx-background-color: #ffffff");
 		layout.getChildren().add(resultBox);
 		
 		ArrayList<Professor> matches = new ArrayList<Professor>();
-		for (int i = 0; i < 5; i ++) {
+		for (int i = 0; i < 21; i ++) {
 			matches.add(new Professor("a"+i, new ArrayList<String>(),"a"+i, "a"+i, "a"+i));
 		}
 		
@@ -65,8 +74,9 @@ public class ResultsPane extends Pane {
 		for (int i = 0; i < matches.size(); i++ ) {
 			temp = new Button();
 			temp.setBackground(null);
+			temp.setPrefSize(width*0.3, height * 0.05);
 			temp.setText(matches.get(i).getName());
-			temp.setOnAction(new ProfileEvent(matches.get(i),layout));
+			temp.setOnAction( new ProfileEvent(temp, matches.get(i),layout));
 			resultList.getChildren().add(temp);
 		};
 		

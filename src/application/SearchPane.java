@@ -2,7 +2,6 @@ package application;
 
 import java.util.ArrayList;
 import Entities.*;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -43,8 +42,6 @@ public class SearchPane extends Pane {
 			@Override
 			public void handle(ActionEvent e) {
 				Scene sc = Main.getScene();
-				System.out.println(SearchPane.this.selDept.getValue());
-				System.out.println(SearchPane.this.keys);
 				sc.setRoot(new ResultsPane(SearchPane.this.selDept.getValue(), SearchPane.this.keys, SearchPane.this.width, SearchPane.this.height));
 			}
 		});
@@ -70,7 +67,8 @@ public class SearchPane extends Pane {
 		this.selDept.setLayoutX(this.width/2-250);
 		this.selDept.setLayoutY(100);
 		
-		TextField selKey = new TextField("Enter Keywords");
+		TextField selKey = new TextField("");
+		selKey.setPromptText("Enter keywords");
 		selKey.setPrefWidth(500);
 		selKey.setPrefHeight(50);
 		selKey.setLayoutX(this.width/2-250);
@@ -87,6 +85,20 @@ public class SearchPane extends Pane {
 				SearchPane.this.keypane.getChildren().add(textbox);
 			}
 		});
+		
+		ArrayList<String> strlist = new ArrayList<String>();
+		
+		Button btnkey = new Button();
+		
+		for (int i = 0; i < strlist.size(); i++ ) {
+			btnkey= new Button();
+			btnkey.setBackground(null);
+			btnkey.setPrefSize(width*0.3, height * 0.05);
+			btnkey.setText("a");
+			btnkey.setOnAction( (e) -> {
+			});
+			SearchPane.this.keypane.getChildren().add(btnkey);
+		};
 		
 		this.keypane = new FlowPane();
 		this.keypane.setPrefWidth(500);
