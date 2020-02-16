@@ -10,11 +10,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class SearchPane extends Pane {
 	private int height;
 	private int width;
 	private ArrayList<String> keys;
+	private ComboBox<String> selDept;
+	private FlowPane keypane;
 	
 	public SearchPane(int w, int h) {
 		super();
@@ -25,40 +31,67 @@ public class SearchPane extends Pane {
 		Button btn = new Button("Search");
 		btn.setPrefWidth(100);
 		btn.setPrefHeight(50);
-		btn.setLayoutX((this.width/2)-50);
+		btn.setLayoutX((this.width/2)+100);
 		btn.setLayoutY(550);	
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				Scene sc = Main.getScene();
+				System.out.println(SearchPane.this.selDept.getValue());
+				System.out.println(SearchPane.this.keys);
 				sc.setRoot(new ResultsPane(SearchPane.this.width, SearchPane.this.height));
 			}
 		});
 		
-		ComboBox<String> selDept = new ComboBox<>();
-		selDept.getItems().addAll("Computer Science", "Other");
-		selDept.setPromptText("Select a Department");
-		selDept.setPrefWidth(500);
-		selDept.setPrefHeight(50);
-		selDept.setLayoutX(this.width/2-250);
-		selDept.setLayoutY(100);
+		Button clr = new Button("Clear");
+		clr.setPrefWidth(100);
+		clr.setPrefHeight(50);
+		clr.setLayoutX((this.width/2)-200);
+		clr.setLayoutY(550);	
+		clr.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				SearchPane.this.keys.clear();
+				SearchPane.this.keypane.getChildren().clear();
+			}
+		});
+		
+		this.selDept = new ComboBox<>();
+		this.selDept.getItems().addAll("Computer Science", "Other");
+		this.selDept.setPromptText("Select a Department");
+		this.selDept.setPrefWidth(500);
+		this.selDept.setPrefHeight(50);
+		this.selDept.setLayoutX(this.width/2-250);
+		this.selDept.setLayoutY(100);
 		
 		TextField selKey = new TextField("Enter Keywords");
 		selKey.setPrefWidth(500);
 		selKey.setPrefHeight(50);
 		selKey.setLayoutX(this.width/2-250);
 		selKey.setLayoutY(160);
+		selKey.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				SearchPane.this.keys.add(selKey.getText());
+				Text text = new Text(selKey.getText());
+				Rectangle rec = new Rectangle(text.getLayoutBounds().getWidth()+8, text.getLayoutBounds().getHeight()+8);
+				rec.setFill(Color.web("#89cff0"));
+				StackPane textbox = new StackPane();
+				textbox.getChildren().addAll(rec, text);
+				SearchPane.this.keypane.getChildren().add(textbox);
+			}
+		});
+		
+		this.keypane = new FlowPane();
+		this.keypane.setPrefWidth(500);
+		this.keypane.setPrefHeight(300);
+		this.keypane.setLayoutX(this.width/2-250);
+		this.keypane.setLayoutY(220);
+		this.keypane.setHgap(4);
+		this.keypane.setVgap(4);
 		
 		
-		FlowPane curKeys = new FlowPane();
-		curKeys.setPrefWidth(500);
-		curKeys.setPrefHeight(300);
-		curKeys.setLayoutX(this.width/2-250);
-		curKeys.setLayoutY(220);
-		curKeys.setStyle("-fx-background-color: #00ffff");
-		
-		
-		this.getChildren().addAll(btn, selDept, selKey, curKeys);
-		this.setStyle("-fx-background-color: #e30300");
+		this.getChildren().addAll(btn, this.selDept, selKey, this.keypane, clr);
+		this.setStyle("-fx-background-color: white");
 	}
 }
