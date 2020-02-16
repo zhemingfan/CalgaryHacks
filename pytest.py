@@ -4,7 +4,6 @@ import numpy as np
 import re
 website = "http://contacts.ucalgary.ca/info/cpsc/contact-us/directory"
 page = urllib.request.urlopen(website) 
-path = "/Users/owner/Documents/new.txt"
 soup = BeautifulSoup(page, features="html.parser")
 
 #print(soup.prettify())
@@ -52,11 +51,6 @@ for i in range(25):
 
 
 
-with open(path, 'w') as file:
-	file.writelines('\t'.join(str(j) for j in i) + '\n' for i in data)
-
-
-
 ############### Part 2, iterating through everyone's website ###############
 
 ## filter for professors
@@ -101,19 +95,27 @@ for x in res:
 
 		interest = []
 
+		numList = []
 		for number in soup.findAll('div', {"class": "unitis-phones-list"}):
-			x.append(list(number.stripped_strings))
+			numList = (list(number.stripped_strings))
+		x.append(numList)
 
+		roomList = []
 		for room in soup.findAll('div', {"class": "unitis-rooms-list"}):
-			x.append(list(room.stripped_strings))
+			roomList = (list(room.stripped_strings))
+		x.append(roomList)
 
+		emailList = []	
 		for email in soup.findAll('div', {"class": "unitis-email-list"}):
-			x.append(list(email.stripped_strings))
+			emailList = (list(email.stripped_strings))
+		x.append(emailList)
 
+		websiteList = []
 		for website in soup.findAll('div', {"class": "unitis-website-list"}):
-			x.append([a['href'] for a in website.find_all('a', href=True)])
+			websiteList = (list(website.stripped_strings))
 
-
+			websiteList = ([a['href'] for a in website.find_all('a', href=True)])
+		x.append(websiteList)
 
 		for a in soup.find_all('div', {"class": "unitis-profile-region-1"}):
 			myList = (list(a.stripped_strings))
@@ -138,7 +140,5 @@ for x in res:
 
 
 #print(res)
-
-path = "/Users/owner/Documents/final.txt"
-with open(path, 'w') as file:
+with open('output.txt', 'w') as file:
 	file.writelines('\t'.join(str(j) for j in i) + '\n' for i in res)

@@ -1,39 +1,34 @@
 
-// import org.jsoup.Jsoup;
-// import org.jsoup.nodes.Document;
-// import org.jsoup.nodes.Element;
+import java.io.IOException;
 
-// class main {
-// 	public static void main(String[] args) {
-//         System.out.println("Hello");
+import java.io.*;
 
-//         final String url = "https://sharestobeclosed.telegraph.co.uk/indices/financials/index/MCX";
-//         try {
-//             final Document document = Jsoup.connect(url).get();
+public class main {
+    public static void main(String[] args) {
+        try {
+
+            String s;
+            Process p = Runtime.getRuntime().exec("/usr/local/bin/python3 src/pytest.py");
+
+            BufferedReader stdInput = new BufferedReader(new 
+                 InputStreamReader(p.getInputStream()));
+
+            BufferedReader stdError = new BufferedReader(new 
+                 InputStreamReader(p.getErrorStream()));
+
+            // read the output from the command
+            System.out.println("Here is the standard output of the command:\n");
+            while ((s = stdInput.readLine()) != null) {
+                System.out.println(s);
+            }
             
-//             for (Element row : document.select(
-//                 "table.tablesorter.full tr")) {
-//                 if (row.select("td:nth-of-type(1)").text().equals("")) {
-//                     continue;
-//                 }
-//                 else {
-//                    final String ticker = 
-//                            row.select("td:nth-of-type(1)").text();
-//                    final String name = 
-//                            row.select("td:nth-of-type(2)").text();
-//                    final String tempPrice = 
-//                            row.select("td.right:nth-of-type(3)").text();
-//                    final String tempPrice1 = 
-//                            tempPrice.replace(",", "");
-// //                    final double price = Double.parseDouble(tempPrice1);
-                   
-//                     System.out.println(ticker + " " + name + " " + tempPrice1);
-//                 }
-//             }
-//         }
-//         catch (Exception ex) {
-//             ex.printStackTrace();
-//         }
-
-// 	}
-// }
+            // read any errors from the attempted command
+            System.out.println("Here is the standard error of the command (if any):\n");
+            while ((s = stdError.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
