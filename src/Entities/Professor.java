@@ -1,15 +1,11 @@
+import java.util.*;
+
 public class Professor extends Entity{
   private String website;
   private String email;
 
-  public Professor(String someName){
-    setName(someName);
-  }
-
   public Professor(String someName, ArrayList<String> interestList, String someWebsite, String someDepartment, String someEmail){
-    super(someName);
-    super(interestList);
-    super(someDepartment);
+    super(someName, interestList, someDepartment);
     setWebsite(someWebsite);
     setEmail(someEmail);
   }
@@ -26,7 +22,7 @@ public class Professor extends Entity{
     return email;
   }
 
-  public void setEmail(anEmail){
+  public void setEmail(String anEmail){
     email = anEmail;
   }
 
