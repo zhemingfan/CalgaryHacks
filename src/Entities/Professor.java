@@ -30,5 +30,17 @@ public class Professor extends Entity{
   public void setEmail(String anEmail){
     email = anEmail;
   }
+  
+  public String formatInterests(ArrayList<String> givenInterests) {
+	  String out = "";
+	  for(String item : givenInterests) {
+		  out += "\n" + item;
+	  }
+	  return out;
+  }
+  
+  public String getProfile() {
+	  return getName() + "\n" + getDepartment() + "\n\nInterests:" + formatInterests(getInterests());
+  }
 
 }

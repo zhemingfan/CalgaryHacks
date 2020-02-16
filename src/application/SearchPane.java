@@ -1,14 +1,19 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import Entities.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -18,15 +23,41 @@ import javafx.scene.text.Text;
 public class SearchPane extends Pane {
 	private int height;
 	private int width;
-	private ArrayList<String> keys;
+	public static ArrayList<String> keys;
 	private ComboBox<String> selDept;
 	private FlowPane keypane;
+	private class InterestEvent implements EventHandler<ActionEvent> {
+		private Button temp;
+		
+		public InterestEvent(Button temp) {
+			this.temp = temp;
+		}
+		@Override
+		public void handle(ActionEvent event) {
+	
+				if (keys.contains(temp.getText())) {
+					// remove button text from keys list
+					keys.remove(temp.getText());
+					// set button style to default
+					temp.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff");
+				} else {
+					System.out.println("Selected\n");
+					keys.add(temp.getText());
+					temp.setStyle("-fx-background-color: #ef310d; -fx-text-fill: #000000");
+				}
+			
+		}
+		
+	}
 	
 	public SearchPane(int w, int h) {
 		super();
 		this.height = h;
 		this.width = w;
 		this.keys = new ArrayList<String>();
+		
+		ImageView logo = new ImageView( new Image("/application/logo.png", true));
+		logo.setLayoutX((this.width/2)+100);
 		
 		Button btn = new Button("Search");
 		btn.setPrefWidth(100);
@@ -37,9 +68,7 @@ public class SearchPane extends Pane {
 			@Override
 			public void handle(ActionEvent e) {
 				Scene sc = Main.getScene();
-				System.out.println(SearchPane.this.selDept.getValue());
-				System.out.println(SearchPane.this.keys);
-				sc.setRoot(new ResultsPane(SearchPane.this.width, SearchPane.this.height));
+				sc.setRoot(new ResultsPane(SearchPane.this.selDept.getValue(), SearchPane.this.keys, SearchPane.this.width, SearchPane.this.height));
 			}
 		});
 		
@@ -52,7 +81,10 @@ public class SearchPane extends Pane {
 			@Override
 			public void handle(ActionEvent e) {
 				SearchPane.this.keys.clear();
-				SearchPane.this.keypane.getChildren().clear();
+				SearchPane.this.keypane.getChildren().forEach((i) -> {
+					i.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff");
+				});
+//				SearchPane.this.keypane.getChildren().clear();
 			}
 		});
 		
@@ -64,23 +96,28 @@ public class SearchPane extends Pane {
 		this.selDept.setLayoutX(this.width/2-250);
 		this.selDept.setLayoutY(100);
 		
-		TextField selKey = new TextField("Enter Keywords");
-		selKey.setPrefWidth(500);
-		selKey.setPrefHeight(50);
-		selKey.setLayoutX(this.width/2-250);
-		selKey.setLayoutY(160);
-		selKey.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				SearchPane.this.keys.add(selKey.getText());
-				Text text = new Text(selKey.getText());
-				Rectangle rec = new Rectangle(text.getLayoutBounds().getWidth()+8, text.getLayoutBounds().getHeight()+8);
-				rec.setFill(Color.web("#89cff0"));
-				StackPane textbox = new StackPane();
-				textbox.getChildren().addAll(rec, text);
-				SearchPane.this.keypane.getChildren().add(textbox);
-			}
-		});
+//		TextField selKey = new TextField("");
+//		selKey.setPromptText("Enter keywords");
+//		selKey.setPrefWidth(500);
+//		selKey.setPrefHeight(50);
+//		selKey.setLayoutX(this.width/2-250);
+//		selKey.setLayoutY(160);
+//		selKey.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent e) {
+//				SearchPane.this.keys.add(selKey.getText());
+//				Text text = new Text(selKey.getText());
+//				Rectangle rec = new Rectangle(text.getLayoutBounds().getWidth()+8, text.getLayoutBounds().getHeight()+8);
+//				rec.setFill(Color.web("#89cff0"));
+//				StackPane textbox = new StackPane();
+//				textbox.getChildren().addAll(rec, text);
+//				SearchPane.this.keypane.getChildren().add(textbox);
+//			}
+//		});
+		
+		ArrayList<String> strlist = new ArrayList<String>();
+		
+		
 		
 		this.keypane = new FlowPane();
 		this.keypane.setPrefWidth(500);
@@ -90,8 +127,24 @@ public class SearchPane extends Pane {
 		this.keypane.setHgap(4);
 		this.keypane.setVgap(4);
 		
+		Button btnkey = new Button();
 		
-		this.getChildren().addAll(btn, this.selDept, selKey, this.keypane, clr);
+		ArrayList<String> interestList = new ArrayList<>(Arrays.asList("Coding", "Hackathons", "Cisco", "White Whale AI", "A&W", "Eating"));
+		
+		for (int i = 0; i < 6; i++ ) {
+			btnkey= new Button();
+			
+			btnkey.setBackground(null);
+			btnkey.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff");
+			btnkey.setOnAction( new InterestEvent(btnkey));
+//			btnkey.setPrefSize(width*0.3, height * 0.05);
+			btnkey.setText(interestList.get(i));
+
+			SearchPane.this.keypane.getChildren().add(btnkey);
+		};
+		
+//		this.getChildren().addAll(logo,btn, this.selDept, selKey, this.keypane, clr);
+		this.getChildren().addAll(logo,btn, this.selDept, this.keypane, clr);
 		this.setStyle("-fx-background-color: white");
 	}
 }
