@@ -11,6 +11,10 @@ public class Professor extends Entity{
     setEmail(someEmail);
   }
 
+  public Professor(String someName, ArrayList<String> interestList){
+    super(someName, interestList);
+  }
+
   public String getWebsite(){
     return website;
   }
