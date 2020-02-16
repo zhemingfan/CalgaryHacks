@@ -11,7 +11,7 @@ public class ResultsPane extends Pane {
 	private int height;
 	private int width;
 	
-	public ResultsPane(int h, int w) {
+	public ResultsPane(int w, int h) {
 		super();
 		this.height = h;
 		this.width = w;
@@ -20,7 +20,7 @@ public class ResultsPane extends Pane {
 			@Override
 			public void handle(ActionEvent e) {
 				Scene sc = Main.getScene();
-				sc.setRoot(new SearchPane(ResultsPane.this.height, ResultsPane.this.width));
+				sc.setRoot(new SearchPane(ResultsPane.this.width, ResultsPane.this.height));
 			}
 		});
 		this.getChildren().add(btn);
