@@ -9,12 +9,6 @@ soup = BeautifulSoup(page, features="html.parser")
 
 #print(soup.prettify())
 
-'''
-all = soup.find_all("Professor")
-for link in all:
-	print(link.get("href"))
-'''
-
 all_tables=soup.find_all('table')
 #print(all_tables)
 
@@ -30,6 +24,7 @@ for i in range(25):
 	i = int(i) + 1
 	table_body = table.find('tbody')
 	rows = table_body.find_all('tr')
+	print(rows)
 
 	for row in rows:
 		cols = row.find_all('td')
@@ -106,22 +101,21 @@ for x in res:
 
 		interest = []
 
-		'''
-		for a in soup.findAll("div", {"id": "unitis-profile-block-profileblock_0"}):
-			interest = (list(a.stripped_strings)[1:])
-		'''
-		
-		'''
-		for a in soup.find_all('div', {"id": "unitis-profile-block-profileblock_0"}):
-			interest.append(a.text)
-			str1 = ''.join(interest)
+		for number in soup.findAll('div', {"class": "unitis-phones-list"}):
+			x.append(list(number.stripped_strings))
 
-			for b in str1.split(" "):
-				interest.append(b)
-		'''
+		for room in soup.findAll('div', {"class": "unitis-rooms-list"}):
+			x.append(list(room.stripped_strings))
+
+		for email in soup.findAll('div', {"class": "unitis-email-list"}):
+			x.append(list(email.stripped_strings))
+
+		for website in soup.findAll('div', {"class": "unitis-website-list"}):
+			x.append([a['href'] for a in website.find_all('a', href=True)])
+
+
 
 		for a in soup.find_all('div', {"class": "unitis-profile-region-1"}):
-
 			myList = (list(a.stripped_strings))
 			if "Areas of Interest" in myList: 
 				start = myList.index("Areas of Interest")
@@ -132,7 +126,7 @@ for x in res:
 					myList = myList[start+1:]
 			else:
 				myList = []
-			print(myList)
+			#print(myList)
 
 		website = "http://contacts.ucalgary.ca"	
 	else:
@@ -143,7 +137,7 @@ for x in res:
 
 
 
-print(res)
+#print(res)
 
 path = "/Users/owner/Documents/final.txt"
 with open(path, 'w') as file:
