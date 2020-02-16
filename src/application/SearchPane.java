@@ -1,10 +1,13 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import Entities.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -21,9 +24,10 @@ import javafx.scene.text.Text;
 public class SearchPane extends Pane {
 	private int height;
 	private int width;
-	private ArrayList<String> keys;
+	public static ArrayList<String> keys;
 	private ComboBox<String> selDept;
 	private FlowPane keypane;
+	private VBox vbox = new VBox();
 	private class InterestEvent implements EventHandler<ActionEvent> {
 		private Button temp;
 		
@@ -115,32 +119,39 @@ public class SearchPane extends Pane {
 		
 		ArrayList<String> strlist = new ArrayList<String>();
 		
+		Button descriptor = new Button();
+		descriptor.setBackground(null);
+		descriptor.setText("Which of the following topics interest you?");
 		
+		vbox.setLayoutX(this.width/2-250);
+		vbox.setLayoutY(200);
+		vbox.getChildren().add(descriptor);
 		
 		this.keypane = new FlowPane();
 		this.keypane.setPrefWidth(500);
 		this.keypane.setPrefHeight(300);
 		this.keypane.setLayoutX(this.width/2-250);
-		this.keypane.setLayoutY(220);
+		this.keypane.setLayoutY(240);
 		this.keypane.setHgap(4);
 		this.keypane.setVgap(4);
 		
 		Button btnkey = new Button();
 		
+		ArrayList<String> interestList = new ArrayList<>(Arrays.asList("Coding", "Hackathons", "Cisco", "White Whale AI", "A&W", "Eating", "KBBQ", "Algorithms", "Linux", "Windows"));
+		
 		for (int i = 0; i < 10; i++ ) {
 			btnkey= new Button();
-			
 			btnkey.setBackground(null);
 			btnkey.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff");
 			btnkey.setOnAction( new InterestEvent(btnkey));
 //			btnkey.setPrefSize(width*0.3, height * 0.05);
-			btnkey.setText("a");
+			btnkey.setText(interestList.get(i));
 
 			SearchPane.this.keypane.getChildren().add(btnkey);
 		};
 		
 //		this.getChildren().addAll(logo,btn, this.selDept, selKey, this.keypane, clr);
-		this.getChildren().addAll(logo,btn, this.selDept, this.keypane, clr);
+		this.getChildren().addAll(logo,btn, this.selDept, vbox, this.keypane, clr);
 		this.setStyle("-fx-background-color: white");
 	}
 }
