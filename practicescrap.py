@@ -2,8 +2,6 @@ from bs4 import BeautifulSoup
 import urllib.request
 import numpy as np
 import re
-import sys
-# website = argv[1] # argv[0] returns the first thing ran...which is the name of the python file
 website = "http://contacts.ucalgary.ca/info/cpsc/contact-us/directory"
 page = urllib.request.urlopen(website) 
 path = "/Users/owner/Documents/new.txt"
@@ -13,7 +11,7 @@ soup = BeautifulSoup(page, features="html.parser")
 
 '''
 all = soup.find_all("Professor")
-for link in all: 
+for link in all:
 	print(link.get("href"))
 '''
 
@@ -97,7 +95,6 @@ with open(path, 'w') as file:
 website = "http://contacts.ucalgary.ca"
 
 
-#######EVERRYTHING BELOW IS BEAUTIUFLOUSL
 for x in res:
 	#for a in x: regex searches all list of strings at once, searches all the time
 	profileLink = re.search("<a href.*\">", str(x))
@@ -108,19 +105,42 @@ for x in res:
 		soup = BeautifulSoup(page, features="html.parser")
 
 		interest = []
+
+		'''
+		for a in soup.findAll("div", {"id": "unitis-profile-block-profileblock_0"}):
+			interest = (list(a.stripped_strings)[1:])
+		'''
+		
+		'''
 		for a in soup.find_all('div', {"id": "unitis-profile-block-profileblock_0"}):
 			interest.append(a.text)
 			str1 = ''.join(interest)
 
 			for b in str1.split(" "):
 				interest.append(b)
+		'''
 
+		for a in soup.find_all('div', {"class": "unitis-profile-region-1"}):
+
+			myList = (list(a.stripped_strings))
+			if "Areas of Interest" in myList: 
+				start = myList.index("Areas of Interest")
+				if "Credentials" in myList:
+					end = myList.index("Credentials")
+					myList = myList[start+1:end]
+				else:
+					myList = myList[start+1:]
+			else:
+				myList = []
+			print(myList)
 
 		website = "http://contacts.ucalgary.ca"	
 	else:
 		print("Error 404")
+	
+	x.append(myList)
+	str1 = ''.join(myList)
 
-	x.append(interest)
 
 
 print(res)
