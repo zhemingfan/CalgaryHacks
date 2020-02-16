@@ -155,7 +155,8 @@ public class SearchPane extends Pane {
 		};
 		
 //		this.getChildren().addAll(logo,btn, this.selDept, selKey, this.keypane, clr);
-		this.getChildren().addAll(logo,btn, this.selDept, vbox, this.keypane, clr);
+		
+		this.getChildren().addAll(logo, this.selDept, vbox, this.keypane, clr, btn);
 		this.setStyle("-fx-background-color: white");
 	}
 }
