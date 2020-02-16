@@ -74,8 +74,8 @@ public class ResultsPane extends Pane {
 	    ArrayList<String> testInterest4 = new ArrayList<>(Arrays.asList("Coding", "Datamining", "Cisco", "White Whale AI", "Algorithms"));
 	    ArrayList<String> testInterest5 = new ArrayList<>(Arrays.asList("Hackathons", "Datamining"));
 	    
-	    Professor testProf5 = new Professor("Lorenz Alabood", testInterest5);
-	    Professor testProf4 = new Professor("Khan Linh Phan Li", testInterest4);
+	    Professor testProf5 = new Professor("Lorenz Alabood", testInterest5, "website", "Computer Science", "email");
+	    Professor testProf4 = new Professor("Khan Linh Phan Li", testInterest4, "website", "Computer Science", "email");
 	    Professor testProf3 = new Professor("Jeremy Fan", testInterest3, "www.youtube.com/Jeremy", "Computer Sceince", "jeremy.fan@ucalgary.ca");
 	    Professor testProf2 = new Professor("Kelly Liu", testInterest2, "www.youtube.com/KellyLiu", "Computer Science", "Kelly.Liu2@ucalgary.ca");
 	    Professor testProf = new Professor("Se Yeon Kim", testInterest, "www.youtube.com/SeYeonKim", "Computer Science", "Kim.SeYeon@ucalgary.ca");

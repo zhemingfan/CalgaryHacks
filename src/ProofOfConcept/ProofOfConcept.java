@@ -39,24 +39,4 @@ public static ArrayList<Professor> sortProfList(ArrayList<Professor> = someProfL
 public static String toString(Professor prof, User user){
   return compareStats(prof, user) + "% match with " + prof.getName();
 }
-
-  public static void main(String args[]){
-    ArrayList<String> testUserInterest = new ArrayList<>(Arrays.asList("Raving", "Coding", "Eating", "ABGs"));
-
-    ArrayList<String> testInterest = new ArrayList<>(Arrays.asList("Coding", "White Whale AI", "Eating", "Hackathons", "KBBQ"));
-    ArrayList<String> testInterest2 = new ArrayList<>(Arrays.asList("Raving" , "Eating", "ABGs"));
-    ArrayList<String> testInterest3 = new ArrayList<>(Arrays.asList("Coding", "Raving", "Eating", "ABGs"));
-
-    Professor testProf3 = new Professor("Jeremy Fan", testInterest3, "www.youtube.com/Jeremy", "Computer Sceince", "jeremy.fan@ucalgary.ca");
-    Professor testProf2 = new Professor("Kelly Liu", testInterest2, "www.youtube.com/KellyLiu", "Computer Science", "Kelly.Liu2@ucalgary.ca");
-    Professor testProf = new Professor("Se Yeon Kim", testInterest, "www.youtube.com/SeYeonKim", "Computer Science", "Kim.SeYeon@ucalgary.ca");
-
-    ArrayList<Professor> profList = new ArrayList<>(Arrays.asList(testProf, testProf2, testProf3));
-
-    User testUser = new User("Jonathan Santos", testUserInterest, "Computer Science");
-    for(Professor prof : profList){
-      System.out.println((toString(prof, testUser)));
-    }
-
-  }
 }
