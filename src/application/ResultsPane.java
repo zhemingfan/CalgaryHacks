@@ -82,8 +82,7 @@ public class ResultsPane extends Pane {
 //
 //	    ArrayList<Professor> matches = new ArrayList<>(Arrays.asList(testProf, testProf2, testProf3, testProf4, testProf5));
 	    
-		
-		
+
 	    //ArrayList<String> testUserInterest = new ArrayList<>(Arrays.asList("Datamining", "Coding", "Eating", "A&W"));
 	    User testUser = new User("Jonathan Santos", SearchPane.keys, "Computer Science");
 	    ProofOfConcept poc = new ProofOfConcept();

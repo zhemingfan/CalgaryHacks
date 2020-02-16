@@ -60,7 +60,8 @@ public class SearchPane extends Pane {
 		this.keys = new ArrayList<String>();
 		
 		ImageView logo = new ImageView( new Image("/application/logo.png", true));
-		logo.setLayoutX((this.width/2)+100);
+		logo.setLayoutX((this.width/(2)-50));
+		logo.setLayoutY(100);
 		
 		Button btn = new Button("Search");
 		btn.setPrefWidth(100);
@@ -97,7 +98,8 @@ public class SearchPane extends Pane {
 		this.selDept.setPrefWidth(500);
 		this.selDept.setPrefHeight(50);
 		this.selDept.setLayoutX(this.width/2-250);
-		this.selDept.setLayoutY(100);
+		this.selDept.setLayoutY(235);
+		this.selDept.setEditable(true);
 		
 //		TextField selKey = new TextField("");
 //		selKey.setPromptText("Enter keywords");
@@ -125,14 +127,14 @@ public class SearchPane extends Pane {
 		descriptor.setText("Which of the following topics interest you?");
 		
 		vbox.setLayoutX(this.width/2-250);
-		vbox.setLayoutY(200);
+		vbox.setLayoutY(350);
 		vbox.getChildren().add(descriptor);
 		
 		this.keypane = new FlowPane();
 		this.keypane.setPrefWidth(500);
 		this.keypane.setPrefHeight(300);
 		this.keypane.setLayoutX(this.width/2-250);
-		this.keypane.setLayoutY(240);
+		this.keypane.setLayoutY(390);
 		this.keypane.setHgap(4);
 		this.keypane.setVgap(4);
 		
