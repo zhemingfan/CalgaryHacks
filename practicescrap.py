@@ -93,17 +93,36 @@ with open(path, 'w') as file:
 ## loop through website URLs and extract their research interests
 
 website = "http://contacts.ucalgary.ca"
+
+
+#######EVERRYTHING BELOW IS BEAUTIUFLOUSL
 for x in res:
-	for a in x:
-		profileLink = re.search("<a href.*\">", str(x))
-		if profileLink is not None:
-			website = website + profileLink.group()[9:-2]
+	#for a in x: regex searches all list of strings at once, searches all the time
+	profileLink = re.search("<a href.*\">", str(x))
+	if profileLink is not None:
+		website = website + profileLink.group()[9:-2]
 
-			print(website)
-			page = urllib.request.urlopen(website) 
-			soup = BeautifulSoup(page, features="html.parser")
-			website = "http://contacts.ucalgary.ca"
-		else:
-			print("Error 404")
+		page = urllib.request.urlopen(website) 
+		soup = BeautifulSoup(page, features="html.parser")
+
+		interest = []
+		for a in soup.find_all('div', {"id": "unitis-profile-block-profileblock_0"}):
+			interest.append(a.text)
+			str1 = ''.join(interest)
+
+			for b in str1.split(" "):
+				interest.append(b)
 
 
+		website = "http://contacts.ucalgary.ca"	
+	else:
+		print("Error 404")
+
+	x.append(interest)
+
+
+print(res)
+
+path = "/Users/owner/Documents/final.txt"
+with open(path, 'w') as file:
+	file.writelines('\t'.join(str(j) for j in i) + '\n' for i in res)
