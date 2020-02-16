@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import urllib.request
 import numpy as np
 import re
+import sys
+# website = argv[1] # argv[0] returns the first thing ran...which is the name of the python file
 website = "http://contacts.ucalgary.ca/info/cpsc/contact-us/directory"
 page = urllib.request.urlopen(website) 
 path = "/Users/owner/Documents/new.txt"
@@ -11,7 +13,7 @@ soup = BeautifulSoup(page, features="html.parser")
 
 '''
 all = soup.find_all("Professor")
-for link in all:
+for link in all: 
 	print(link.get("href"))
 '''
 
