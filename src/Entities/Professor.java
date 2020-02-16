@@ -11,6 +11,10 @@ public class Professor extends Entity{
     setEmail(someEmail);
   }
 
+  public Professor(String someName, ArrayList<String> interestList){
+    super(someName, interestList);
+  }
+
   public String getWebsite(){
     return website;
   }
@@ -25,6 +29,18 @@ public class Professor extends Entity{
 
   public void setEmail(String anEmail){
     email = anEmail;
+  }
+  
+  public String formatInterests(ArrayList<String> givenInterests) {
+	  String out = "";
+	  for(String item : givenInterests) {
+		  out += "\n" + item;
+	  }
+	  return out;
+  }
+  
+  public String getProfile() {
+	  return getName() + "\n" + getDepartment() + "\n\nInterests:" + formatInterests(getInterests());
   }
 
 }

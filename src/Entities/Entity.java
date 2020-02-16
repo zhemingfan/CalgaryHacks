@@ -12,6 +12,11 @@ public Entity(String aName, ArrayList<String> interestList, String aDepartment){
   setDepartment(aDepartment);
 }
 
+public Entity(String aName, ArrayList<String> interestList){
+  setName(aName);
+  setInterests(interestList);
+}
+
   public String getName(){
     return name;
   }

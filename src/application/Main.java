@@ -17,7 +17,7 @@ public class Main extends Application {
 			Main.sc = new Scene(new SearchPane(S_WIDTH, S_HEIGHT), S_WIDTH, S_HEIGHT);
 			ps.setScene(sc);
 
-			ps.setFullScreen(true);
+			ps.setFullScreen(false);
 			ps.setFullScreenExitHint("");
 			//ps.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			ps.show();
