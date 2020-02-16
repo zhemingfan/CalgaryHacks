@@ -1,3 +1,4 @@
+package Entities;
 import java.util.*;
 
 public class User extends Entity{

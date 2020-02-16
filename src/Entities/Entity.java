@@ -1,12 +1,13 @@
+package Entities;
 import java.util.*;
 
 public class Entity{
   private String name;
-  private ArrayList<String> interests;
+  private ArrayList<String> interests = new ArrayList<>();
   private String department;
 
 public Entity(String aName, ArrayList<String> interestList, String aDepartment){
-  setName(name);
+  setName(aName);
   setInterests(interestList);
   setDepartment(aDepartment);
 }
