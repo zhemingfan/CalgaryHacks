@@ -20,25 +20,6 @@ all_tables=soup.find_all('table')
 
 data = []
 
-'''
-for i in range(25): 
-	num = 'uofc-table-' + str(i+1)
-	table = soup.find('table', id=(num))
-
-	i = int(i) + 1
-	table_body = table.find('tbody')
-	rows = table_body.find_all('tr')
-
-	for row in rows:
-		cols = row.find_all('td')
-		cols = [ele.text.strip() for ele in cols]
-
-		for x in row.find_all('a', href = True):
-			data.append(x)
-			data.append([ele for ele in cols if cols]) # Get rid of empty values
-
-print(data)
-'''
 
 keyword_list = ['Professor']
 
@@ -75,10 +56,10 @@ for i in range(25):
 
 
 
-'''
+
 with open(path, 'w') as file:
 	file.writelines('\t'.join(str(j) for j in i) + '\n' for i in data)
-'''
+
 
 
 ############### Part 2, iterating through everyone's website ###############
@@ -86,27 +67,43 @@ with open(path, 'w') as file:
 ## filter for professors
 
 #if thing in some_list: some_list.remove(thing)
-print(data)
-print("\n")
-print("\n")
 
 print("\n")
-
+print("\n")
+print("\n")
 print("\n")
 
-keyword = "Professor"
-
-for x in data: 
-	if (keyword in x) == False:
-		data.remove(x)
 
 
-print(data)
+
+
 
 ## loop through all professors, can grab research interests
 
-#page = urllib.request.urlopen(website) 
+res = [i for i in data if "Professor" in i[1]]
+print(res)
+'''
+path = "/Users/owner/Documents/Charlie.txt"
+with open(path, 'w') as file:
+	file.writelines('\t'.join(str(j) for j in i) + '\n' for i in res)
+'''
 
 
+
+## loop through website URLs and extract their research interests
+
+website = "http://contacts.ucalgary.ca"
+for x in res:
+	for a in x:
+		profileLink = re.search("<a href.*\">", str(x))
+		if profileLink is not None:
+			website = website + profileLink.group()[9:-2]
+
+			print(website)
+			page = urllib.request.urlopen(website) 
+			soup = BeautifulSoup(page, features="html.parser")
+			website = "http://contacts.ucalgary.ca"
+		else:
+			print("Error 404")
 
 
